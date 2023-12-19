@@ -57,18 +57,7 @@ Aplicația este destinată utilizatorilor care vor să organizeze mai ușor ieș
 - să pot monitoriza locaţiile membrilor familiei (prezenţi şi în lista de prieteni), pentru a mă asigura că sunt mereu în siguranta.
 
 
-#### Check-In & Join services - cerinte ce tin de capacitatea de a crea un check-in intr-o anumita locatie sau de a te alatura altui grup:
-* Comunicarea intre utilizatori din aceeasi proximitate
-* Trimiterea de join-requests catre utilizatori
-* Configurarea unei liste de persoane apropiate / prieteni
-* Trimiterea de invitatii de prietenie catre alti utilizatori
-* Generarea unui punct de intalnire folosind Maps 
 
-
-#### Intelligent Picks - cerinte ce includ analizarea si detectarea locatiilor favorite pe baza activitatii recente a utilizatorului:
-* Invatarea automata a celor mai frcventate zone ale utilizatorului
-* Detectarea timpului mediu petrecut in anumite locatii
-* Alertarea utilizatoriilor prin notificari atunci cand e in preajma locatiilor preferate
 
 
 ## Activity Diagram
