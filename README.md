@@ -64,3 +64,12 @@ Aplicația este destinată utilizatorilor care vor să organizeze mai ușor ieș
 
 ![image](https://user-images.githubusercontent.com/72194114/202900892-9f11f80d-d471-40a9-a2dd-e194bb54fa9f.png)
 
+## Interaction Diagram for the notification system of the check-in
+![WhatsApp Image 2023-12-18 at 22 07 24](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/100606068/8d4b8a27-7b73-4eab-ac0a-24c3119a0163)
+
+## State Diagram for joining Check-in
+![WhatsApp Image 2023-12-18 at 20 44 52 (1)](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/100606068/002808bf-dd46-49f9-8327-736421b0fbed)
+
+## Interaction Diagram of displaying friends activities
+[diag_interactiune.drawio (1).pdf](https://github.com/AMSS-Team/AMSS-CoffeIn/files/13731006/diag_interactiune.drawio.1.pdf)
+
