@@ -71,5 +71,6 @@ Aplicația este destinată utilizatorilor care vor să organizeze mai ușor ieș
 ![WhatsApp Image 2023-12-18 at 20 44 52 (1)](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/100606068/002808bf-dd46-49f9-8327-736421b0fbed)
 
 ## Interaction Diagram of displaying friends activities
-[diag_interactiune.drawio (1).pdf](https://github.com/AMSS-Team/AMSS-CoffeIn/files/13731006/diag_interactiune.drawio.1.pdf)
+![image](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/100606068/483d1d95-79b0-49f2-9bc3-008631a0b3fa)
+
 
