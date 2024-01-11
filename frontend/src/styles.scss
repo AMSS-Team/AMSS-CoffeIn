@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  button {
+    @apply border px-2 py-1 cursor-pointer rounded shadow;
+  }
+}
+
+@layer components {
+
+}
+
+@layer utilities {
+
+}
