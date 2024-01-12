@@ -19,6 +19,8 @@ import { HomeTabComponent } from './components/home-tab/home-tab.component';
 import {HttpClientModule} from "@angular/common/http";
 import { CheckInComponent } from './components/check-in/check-in.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatButtonModule} from "@angular/material/button";
+import { FriendListItemComponent } from './components/friend-list-item/friend-list-item.component';
 
 
 
@@ -28,7 +30,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     AppComponent,
     FriendsTabComponent,
     HomeTabComponent,
-    CheckInComponent
+    CheckInComponent,
+    FriendListItemComponent
   ],
     imports: [
         BrowserModule,
@@ -48,6 +51,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFirestoreModule,
         MatProgressSpinnerModule,
+        MatButtonModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

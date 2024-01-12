@@ -19,24 +19,24 @@ export class UsersService {
   constructor(private db: AngularFirestore, private http: HttpClient, private toastr: ToastrService) {
   }
 
-  public getFollowed(): Observable<User[]> {
+  public followUser(userId: string){
     const user = getAuth().currentUser;
     return from(user!.getIdToken()).pipe(
       switchMap((token) => {
-        return this.http.get<User[]>(`${environment.apiUrl}/follow/following`, {
+        return this.http.post(`${environment.apiUrl}/follow/${userId}`,null,{
           headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`
           },
         });
       })
     );
   }
 
-  public followUser(userId: string){
+  public unfollowUser(userId: string) {
     const user = getAuth().currentUser;
     return from(user!.getIdToken()).pipe(
       switchMap((token) => {
-        return this.http.post(`${environment.apiUrl}/follow/` + userId,null,{
+        return this.http.delete(`${environment.apiUrl}/follow/${userId}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -45,7 +45,7 @@ export class UsersService {
     );
   }
 
-  public findByEmail(email: string): Observable<{data:User} | null> {
+  public findByEmail(email: string): Observable<{data:User}> {
     const user = getAuth().currentUser;
     return from(user!.getIdToken()).pipe(
       switchMap((token) => {
