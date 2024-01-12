@@ -4,9 +4,11 @@
   </button>
 </div>
 <section class=" mx-auto ">
-  <div class="mt-6 w-fit mx-auto">
-    <img src="https://api.lorem.space/image/face?w=120&h=120&hash=bart89fe" class="rounded-full w-28 " alt="profile picture" srcset="">
-  </div>
+  <ng-container *ngIf="profilePictureUrl">
+    <div class="mt-6 w-fit mx-auto">
+      <img [src]="profilePictureUrl" class="rounded-full w-28 " alt="profile picture" srcset="">
+    </div>
+  </ng-container>
   <div class="text-center mt-12">
     <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
       {{this.getDisplayName}}

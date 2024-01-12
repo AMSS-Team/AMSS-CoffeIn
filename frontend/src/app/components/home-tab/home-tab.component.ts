@@ -24,12 +24,17 @@ export class HomeTabComponent {
     return "";
   }
 
+  public get profilePictureUrl(): string | null {
+    const user = getAuth().currentUser!;
+    return user.photoURL;
+  }
+
   public get getEmail() : string {
     if (this.isSignedIn) {
       const user = getAuth().currentUser;
       let email: string | null | undefined = "";
       email = user?.email;
-      if (email == null){
+      if (email == null) {
         email = "";
       }
       return email;
