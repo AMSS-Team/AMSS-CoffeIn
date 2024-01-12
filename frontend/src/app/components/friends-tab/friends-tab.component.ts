@@ -9,6 +9,10 @@ import {getAuth} from "@firebase/auth";
 })
 export class FriendsTabComponent {
   public isFriendDisplayed: boolean = false;
+
+  public friendName: string = "cc";
+  public friendEmail: string = "";
+  public friendId: string= "";
   public friendName: string = "";
   public friendEmail: string = "";
 
@@ -23,6 +27,25 @@ export class FriendsTabComponent {
         return;
       }
 
+
+      console.log(user);
+
+      this.friendName = user.data.displayName!;
+      this.friendEmail = user.data.email;
+      this.isFriendDisplayed = true;
+      this.friendId = user.data.uid;
+    });
+  }
+
+  public followUser() {
+    const user = getAuth().currentUser;
+    if (user == null) {
+      alert("You are not logged in!");
+      return;
+    }
+
+    this.usersService.followUser(this.friendId).subscribe(() => {
+      alert("User followed!");
       this.friendName = user.email!;
       this.friendEmail = user.email;
       this.isFriendDisplayed = true;

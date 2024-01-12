@@ -23,6 +23,16 @@ router.get("/following", async (req, res) => {
     }
 });
 
+router.post("/search", async (req, res) => {
+    try {
+        const email = (req.body as SearchUserDto).email;
+        const user = await UserRepository.getInstance().findUserByEmail(email);
+        res.send({data: toUserDto(user)} as ApiResponse);
+    } catch (e) {
+        res.status(500).send({message: (e as Error).message} as ApiResponse);
+    }
+});
+
 router.post("/:userId", async (req, res) => {
     const currentUser = await getCurrentUser(req);
     const userIdToFollow = req.params.userId;
@@ -37,14 +47,6 @@ router.post("/:userId", async (req, res) => {
     }
 });
 
-router.post("/search", async (req, res) => {
-    try {
-        const email = (req.body as SearchUserDto).email;
-        const user = await UserRepository.getInstance().findUserByEmail(email);
-        res.send({data: toUserDto(user)} as ApiResponse);
-    } catch (e) {
-        res.status(500).send({message: (e as Error).message} as ApiResponse);
-    }
-});
+
 
 export default router;
