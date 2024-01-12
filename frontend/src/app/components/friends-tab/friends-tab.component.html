@@ -3,6 +3,8 @@
     <mat-form-field class="friend-searcher">
       <mat-label>Search for friends</mat-label>
       <input matInput placeholder="Friend's email" name="email" [(ngModel)]="friendEmail" #userEmail >
+      <input matInput placeholder="Friend's email" [ngModel]="friendEmail" #userEmail >
+
     </mat-form-field>
   </form>
 </div>
@@ -23,6 +25,8 @@
     </div>
     <div class="flex justify-center mt-2.5">
       <button class="bg-rose-500 hover:bg-rose-700 text-black dark:text-white font-bold py-2 px-4 rounded-full" (click)="followUser()">
+      <button class="bg-rose-500 hover:bg-rose-700 text-black dark:text-white font-bold py-2 px-4 rounded-full">
+
         Follow
       </button>
     </div>

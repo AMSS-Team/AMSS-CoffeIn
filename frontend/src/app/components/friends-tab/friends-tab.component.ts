@@ -9,9 +9,12 @@ import {getAuth} from "@firebase/auth";
 })
 export class FriendsTabComponent {
   public isFriendDisplayed: boolean = false;
+
   public friendName: string = "cc";
   public friendEmail: string = "";
   public friendId: string= "";
+  public friendName: string = "";
+  public friendEmail: string = "";
 
   constructor(private usersService: UsersService) {}
 
@@ -23,6 +26,7 @@ export class FriendsTabComponent {
         alert("No user with this name!");
         return;
       }
+
 
       console.log(user);
 
@@ -42,6 +46,9 @@ export class FriendsTabComponent {
 
     this.usersService.followUser(this.friendId).subscribe(() => {
       alert("User followed!");
+      this.friendName = user.email!;
+      this.friendEmail = user.email;
+      this.isFriendDisplayed = true;
     });
   }
 }

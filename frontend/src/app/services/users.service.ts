@@ -17,6 +17,7 @@ import {CreateCheckInDto} from "../models/CreateCheckInDto";
 })
 export class UsersService {
   constructor(private db: AngularFirestore, private http: HttpClient, private toastr: ToastrService) {
+  constructor(private db: AngularFirestore, private http: HttpClient) {
   }
 
   public getFollowed(): Observable<User[]> {
@@ -64,6 +65,11 @@ export class UsersService {
     return from(user!.getIdToken()).pipe(
       switchMap((token) => {
         return this.http.post<{data: CheckInModel}>(`${environment.apiUrl}/location/checkin`, checkInModel, {
+  public findByEmail(email: string): Observable<User | null> {
+    const user = getAuth().currentUser;
+    return from(user!.getIdToken()).pipe(
+      switchMap((token) => {
+        return this.http.post<User>(`${environment.apiUrl}/follow/search`, { email }, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -71,6 +77,7 @@ export class UsersService {
       })
     );
   }
+
 
   public getCheckIns(listCheckInDto: ListCheckinsDto): Observable<{data: ResultListCheckinsDto}> {
     const user = getAuth().currentUser;
@@ -110,8 +117,4 @@ export class UsersService {
       }));
   }
 }
-
-
-
-
 

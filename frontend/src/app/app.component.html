@@ -1,11 +1,11 @@
-<main class="w-100 h-[100vh] flex flex-row dark:bg-slate-800 dark:text-white">
+<main class="w-100 h-[100vh] flex flex-row">
   <div class="grow-[2] flex justify-center items-center w-100 h-100">
           <div id="map"></div>
   </div>
 
   <aside class="border-l-2 grow-[1] dark:border-white">
     <ng-container *ngIf="isSignedIn; else notLoggedIn">
-<<<<<<< Updated upstream
+
       <div class="flex justify-center mt-2.5">
         <button class="bg-cyan-500 hover:bg-cyan-700 text-black dark:text-white font-bold  rounded-full" (click)="setProfileDisplayed()">
           {{this.getInitials}}
@@ -30,7 +30,6 @@
               Active
             </div>
           </div>
-=======
       <mat-tab-group>
         <mat-tab label="Home">
           <app-home-tab></app-home-tab>
@@ -39,31 +38,18 @@
           <app-friends-tab></app-friends-tab>
         </mat-tab>
       </mat-tab-group>
-
     </ng-container>
 
     <ng-template #notLoggedIn>
       <mat-tab-group>
-        <mat-tab label="Coffee-In">
->>>>>>> Stashed changes
+        <mat-tab label="SignIn">
           <div class="flex justify-center mt-2.5">
-            <button class="bg-rose-500 hover:bg-rose-700 text-black dark:text-white font-bold py-2 px-4 rounded-full" (click)="signOut()">
-              Sign out
+            <button class="bg-emerald-500 hover:bg-emerald-700 text-black dark:text-white font-bold py-2 px-4 rounded-full" (click)="signIn()">
+              Sign in
             </button>
           </div>
-        </section>
-      </ng-container>
-      <ng-template #notDisplayed>
-        <div class="shadow border-b-2 p-2"></div>
-      </ng-template>
-    </ng-container>
-    <ng-template #notLoggedIn>
-      <div class="flex justify-center mt-2.5">
-        <button class="bg-emerald-500 hover:bg-emerald-700 text-black dark:text-white font-bold py-2 px-4 rounded-full" (click)="signIn()">
-          Sign in
-        </button>
-      </div>
-      <div class="shadow border-b-2 p-2"></div>
+        </mat-tab>
+      </mat-tab-group>
     </ng-template>
   </aside>
 </main>
