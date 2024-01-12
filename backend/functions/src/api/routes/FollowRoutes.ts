@@ -23,6 +23,23 @@ router.get("/following", async (req, res) => {
     }
 });
 
+router.post("/search", async (req, res) => {
+    const currentUser = await getCurrentUser(req);
+
+    try {
+        const email = (req.body as SearchUserDto).email;
+        const user = await UserRepository.getInstance().findUserByEmail(email);
+
+        if (user.uid === currentUser.uid) {
+            res.status(404).send({message: "Not found."});
+        }
+
+        res.send({data: toUserDto(user)} as ApiResponse);
+    } catch (e) {
+        res.status(500).send({message: (e as Error).message} as ApiResponse);
+    }
+});
+
 router.post("/:userId", async (req, res) => {
     const currentUser = await getCurrentUser(req);
     const userIdToFollow = req.params.userId;
@@ -31,17 +48,21 @@ router.post("/:userId", async (req, res) => {
             currentUser.uid,
             userIdToFollow,
         );
-        res.sendStatus(200);
+        res.status(200).send({message: "OK"});
     } catch (e) {
         res.status(500).send({message: (e as Error).message} as ApiResponse);
     }
 });
 
-router.post("/search", async (req, res) => {
+router.delete("/:userId", async (req, res) => {
+    const currentUser = await getCurrentUser(req);
+    const userIdToUnfollow = req.params.userId;
     try {
-        const email = (req.body as SearchUserDto).email;
-        const user = await UserRepository.getInstance().findUserByEmail(email);
-        res.send({data: toUserDto(user)} as ApiResponse);
+        await UserRepository.getInstance().unfollowUser(
+            currentUser.uid,
+            userIdToUnfollow,
+        );
+        res.status(200).send({message: "OK"});
     } catch (e) {
         res.status(500).send({message: (e as Error).message} as ApiResponse);
     }
