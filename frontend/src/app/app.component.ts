@@ -1,32 +1,32 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {initializeApp} from '@firebase/app';
-import {connectAuthEmulator, getAuth, signInWithPopup, signOut, GoogleAuthProvider} from '@firebase/auth';
-import {GoogleMap, MapInfoWindow, MapMarker} from "@angular/google-maps";
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { initializeApp } from '@firebase/app';
+import { connectAuthEmulator, getAuth, signInWithPopup, signOut, GoogleAuthProvider } from '@firebase/auth';
+import { GoogleMap, MapInfoWindow, MapMarker } from "@angular/google-maps";
 import { ToastrService } from 'ngx-toastr';
+import { connectFirestoreEmulator, getFirestore } from '@firebase/firestore';
+import { UsersService } from './services/users.service';
+import {environment} from "../environments/environment.prod";
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-  constructor(private toastr: ToastrService) {}
-
-  private profileDisplayed: boolean = false;
   private displayMap: boolean = false;
-
-  loading = false;
 
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap | undefined;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow | undefined;
-
-  mapZoom = 12;
-  googlePoint: google.maps.LatLngLiteral = {
+  public loading = false;
+  public mapZoom = 12;
+  public googlePoint: google.maps.LatLngLiteral = {
     lat: 0,
     lng: 0,
   };
-  mapCenter: google.maps.LatLng = new google.maps.LatLng(this.googlePoint);
-  mapOptions: google.maps.MapOptions = {
+  public mapCenter: google.maps.LatLng = new google.maps.LatLng(this.googlePoint);
+  public mapOptions: google.maps.MapOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     zoomControl: true,
     scrollwheel: true,
@@ -249,20 +249,28 @@ export class AppComponent implements OnInit {
       }
     ]
   };
-
-  markerInfoContent = '';
-  markerOptions: google.maps.MarkerOptions = {
+  public markerInfoContent = '';
+  public markerOptions: google.maps.MarkerOptions = {
     draggable: false,
     animation: google.maps.Animation.DROP,
   };
 
-  openInfoWindow(marker: MapMarker) {
+  constructor(private toastr: ToastrService, private service: UsersService) {}
+
+  ngOnInit(): void {
+    initializeApp(environment.firebaseConfig);
+    connectAuthEmulator(getAuth(), 'http://localhost:9099');
+    connectFirestoreEmulator(getFirestore(), 'localhost', 8080);
+    this.getCurrentLocation();
+  }
+
+  public openInfoWindow(marker: MapMarker) {
     if(this.infoWindow){
       this.infoWindow.open(marker);
     }
   }
 
-  getCurrentLocation() {
+  public getCurrentLocation() {
     this.loading = true;
     navigator.geolocation.getCurrentPosition(
       (position: GeolocationPosition) => {
@@ -306,21 +314,6 @@ export class AppComponent implements OnInit {
     return getAuth().currentUser !== null;
   }
 
-  private firebaseConfig = {
-    apiKey: 'AIzaSyAfran-zw_FBEPVZ0SksAYjl5Frm--k4IU',
-    authDomain: 'coffee-in-b7cda.firebaseapp.com',
-    projectId: 'coffee-in-b7cda',
-    storageBucket: 'coffee-in-b7cda.appspot.com',
-    messagingSenderId: '556504257342',
-    appId: '1:556504257342:web:ea6e2f7fd0743a8ae9d26f'
-  };
-
-  ngOnInit(): void {
-    initializeApp(this.firebaseConfig);
-    connectAuthEmulator(getAuth(), 'http://localhost:9099');
-    this.getCurrentLocation();
-  }
-
   public async signIn(): Promise<void> {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
@@ -333,55 +326,6 @@ export class AppComponent implements OnInit {
     await signOut(auth);
   }
 
-  public get getInitials(): string {
-    if (this.isSignedIn) {
-      const user = getAuth().currentUser;
-      const displayName = user?.displayName;
-      let initials: string = "/";
-      if (displayName != null) {
-        initials = displayName.replace(/[^A-Z]+/g, "");
-      }
-      return initials;
-    }
-    else {
-      return "/";
-    }
-  }
-
-  public get getDisplayName() : string {
-    if (this.isSignedIn) {
-      const user = getAuth().currentUser;
-      let displayName: string | null | undefined = "";
-      displayName = user?.displayName;
-      if (displayName == null){
-        displayName = "";
-      }
-      return displayName;
-    }
-    return "";
-  }
-
-  public get getEmail() : string {
-    if (this.isSignedIn) {
-      const user = getAuth().currentUser;
-      let email: string | null | undefined = "";
-      email = user?.email;
-      if (email == null){
-        email = "";
-      }
-      return email;
-    }
-    return "";
-  }
-
-  public get isProfileDisplayed(): boolean {
-    return this.profileDisplayed;
-  }
-
-  public setProfileDisplayed(): void {
-    this.profileDisplayed = !this.profileDisplayed;
-  }
-
   public setDisplayMap(): void {
     console.log(this.displayMap);
     this.displayMap = !this.displayMap;
@@ -390,5 +334,4 @@ export class AppComponent implements OnInit {
   public get isDisplayMap(): boolean {
     return this.displayMap;
   }
-
 }
