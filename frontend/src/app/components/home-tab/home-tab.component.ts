@@ -28,6 +28,7 @@ export class HomeTabComponent {
     const user = getAuth().currentUser!;
     return user.photoURL;
   }
+
   public get getEmail() : string {
     if (this.isSignedIn) {
       const user = getAuth().currentUser;
