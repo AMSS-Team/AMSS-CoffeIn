@@ -1,0 +1,30 @@
+<div class="flex justify-center mt-2.5">
+  <form class="search-bar" (keyup.backspace)="isFriendDisplayed = false" (keyup.enter)="searchUser(userEmail.value)">
+    <mat-form-field class="friend-searcher">
+      <mat-label>Search for friends</mat-label>
+      <input matInput placeholder="Friend's email" name="email" [(ngModel)]="friendEmail" #userEmail >
+    </mat-form-field>
+  </form>
+</div>
+
+<ng-container *ngIf="isFriendDisplayed">
+  <section class="mx-auto">
+    <div class="mt-6 w-fit mx-auto">
+      <img src="assets/image.png" class="rounded-full w-28 " alt="profile picture" srcset="">
+    </div>
+    <div class="text-center mt-12">
+      <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+        {{this.friendName}}
+      </h3>
+      <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold">
+        <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+        {{this.friendEmail}}
+      </div>
+    </div>
+    <div class="flex justify-center mt-2.5">
+      <button class="bg-rose-500 hover:bg-rose-700 text-black dark:text-white font-bold py-2 px-4 rounded-full" (click)="followUser()">
+        Follow
+      </button>
+    </div>
+  </section>
+</ng-container>
