@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {getAuth, signOut} from "@firebase/auth";
 import { CheckInModel } from 'app/models/checkIn';
@@ -7,12 +8,17 @@ import { UsersService } from 'app/services/users.service';
 import {ListCheckinsDto} from "app/models/listCheckinsDto";
 import { Router } from '@angular/router';
 
+=======
+import { Component } from '@angular/core';
+import {getAuth, signOut} from "@firebase/auth";
+>>>>>>> 93a74482499b2e73294d7e07fd959c2691850a29
 
 @Component({
   selector: 'app-home-tab',
   templateUrl: './home-tab.component.html',
   styleUrls: ['./home-tab.component.scss']
 })
+<<<<<<< HEAD
 export class HomeTabComponent implements OnInit {
 
   isCheckedIn: boolean = false;
@@ -32,6 +38,9 @@ export class HomeTabComponent implements OnInit {
   constructor( private userService: UsersService,
                 private cdr: ChangeDetectorRef) { }
 
+=======
+export class HomeTabComponent {
+>>>>>>> 93a74482499b2e73294d7e07fd959c2691850a29
   public get isSignedIn(): boolean {
     return getAuth().currentUser !== null;
   }
@@ -87,6 +96,7 @@ export class HomeTabComponent implements OnInit {
       return "/";
     }
   }
+<<<<<<< HEAD
 
   public getCheckInDetails()
   {
@@ -127,4 +137,6 @@ export class HomeTabComponent implements OnInit {
 
 
 
+=======
+>>>>>>> 93a74482499b2e73294d7e07fd959c2691850a29
 }
