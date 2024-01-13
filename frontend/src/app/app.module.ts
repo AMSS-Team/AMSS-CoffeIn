@@ -3,19 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { GoogleMap, GoogleMapsModule} from "@angular/google-maps";
 import {ToastrModule} from "ngx-toastr";
-<<<<<<< Updated upstream
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    GoogleMapsModule,
-    ToastrModule.forRoot({
-      positionClass :'toast-bottom-right'
-    })
-=======
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,8 +19,15 @@ import { HomeTabComponent } from './components/home-tab/home-tab.component';
 import {HttpClientModule} from "@angular/common/http";
 import { CheckInComponent } from './components/check-in/check-in.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatButtonModule} from "@angular/material/button";
+import { FriendListItemComponent } from './components/friend-list-item/friend-list-item.component';
+import { Routes } from '@angular/router';
 
-
+const routes: Routes = [
+  {
+    path: '',
+    component: AppComponent
+  }];
 
 
 @NgModule({
@@ -41,8 +35,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     AppComponent,
     FriendsTabComponent,
     HomeTabComponent,
-    CheckInComponent
->>>>>>> Stashed changes
+    CheckInComponent,
+    FriendListItemComponent
   ],
     imports: [
         BrowserModule,
@@ -62,8 +56,10 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFirestoreModule,
         MatProgressSpinnerModule,
+        MatButtonModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

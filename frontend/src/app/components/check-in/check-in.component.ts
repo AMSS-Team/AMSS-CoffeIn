@@ -53,7 +53,7 @@ export class CheckInComponent implements OnInit {
         this.mapService.deleteMarker();
         this.usersService.checkIn(user.uid, checkIn).subscribe(() => {
           this.toastr.success("Check in successful!");
-          this.mapService.addMarker(latitude, longitude, this.formGroup.value.title, true);
+          this.mapService.addMarker(latitude, longitude, this.formGroup.value.title, true, [user.displayName!], [user.uid], user.uid);
         });
       });
 
