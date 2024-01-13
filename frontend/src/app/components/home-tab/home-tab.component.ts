@@ -1,12 +1,36 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {getAuth, signOut} from "@firebase/auth";
+import { CheckInModel } from 'app/models/checkIn';
+import { LocationModel } from 'app/models/LocationModel';
+import { UsersService } from 'app/services/users.service';
+// import listchekinsdto
+import {ListCheckinsDto} from "app/models/listCheckinsDto";
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home-tab',
   templateUrl: './home-tab.component.html',
   styleUrls: ['./home-tab.component.scss']
 })
-export class HomeTabComponent {
+export class HomeTabComponent implements OnInit {
+
+  isCheckedIn: boolean = false;
+
+  checkInDets : CheckInModel = {
+    location: {
+      uid: "",
+      latitude: 0,
+      longitude: 0
+    },
+    timestamp: 0,
+    title: "",
+    description: ""
+  };
+
+  constructor( private userService: UsersService,
+                private cdr: ChangeDetectorRef) { }
+
   public get isSignedIn(): boolean {
     return getAuth().currentUser !== null;
   }
@@ -62,4 +86,44 @@ export class HomeTabComponent {
       return "/";
     }
   }
+
+  public getCheckInDetails() 
+  {
+    const user = getAuth().currentUser;
+
+    if (user != null) 
+    {
+      let listFriendsCheckIns: ListCheckinsDto = {
+        userIds: [],
+      }
+
+      this.userService.getCheckIns({userIds: [user!.uid]}).subscribe((checkIns) => {
+        console.log(checkIns);
+        Object.values(checkIns.data).forEach((checkIn: CheckInModel | null) => {
+            if (checkIn != null) 
+            {
+              this.isCheckedIn = true;
+              //console.log(checkIn.location.latitude);
+              this.checkInDets.location.latitude = checkIn.location.latitude;
+              //console.log(checkIn.location.longitude);
+              this.checkInDets.location.longitude = checkIn.location.longitude;
+              //console.log(checkIn.title);
+              this.checkInDets.title = checkIn.title;
+              //console.log(checkIn.description);
+              this.checkInDets.description = checkIn.description;
+            }
+          }
+        );
+      });
+    }
+  }
+
+
+  ngOnInit(): void 
+  {
+    this.getCheckInDetails();
+  }
+
+
+
 }

@@ -21,8 +21,13 @@ import { CheckInComponent } from './components/check-in/check-in.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatButtonModule} from "@angular/material/button";
 import { FriendListItemComponent } from './components/friend-list-item/friend-list-item.component';
+import { Routes } from '@angular/router';
 
-
+const routes: Routes = [
+  {
+    path: '',
+    component: AppComponent
+  }];
 
 
 @NgModule({
@@ -56,4 +61,5 @@ import { FriendListItemComponent } from './components/friend-list-item/friend-li
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

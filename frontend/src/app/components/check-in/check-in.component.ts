@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {UsersService} from "../../services/users.service";
 import {getAuth} from "@firebase/auth";
 import {CheckInModel} from "../../models/checkIn";
@@ -14,7 +14,11 @@ import {CreateCheckInDto} from "../../models/CreateCheckInDto";
   templateUrl: './check-in.component.html',
   styleUrls: ['./check-in.component.scss']
 })
+
 export class CheckInComponent implements OnInit {
+
+  @Output("getCheckInDetails") getCheckInDetails: EventEmitter<any> = new EventEmitter();
+
   uid: string = "";
   isCheckedIn: boolean = false;
 
@@ -29,7 +33,8 @@ export class CheckInComponent implements OnInit {
     private usersService: UsersService,
     private toastr: ToastrService,
     private fb: FormBuilder,
-    private mapService: MapService
+    private mapService: MapService,
+    private cd: ChangeDetectorRef,
   ) {}
 
 
@@ -54,6 +59,8 @@ export class CheckInComponent implements OnInit {
         this.usersService.checkIn(user.uid, checkIn).subscribe(() => {
           this.toastr.success("Check in successful!");
           this.mapService.addMarker(latitude, longitude, this.formGroup.value.title, true);
+          this.formGroup.reset();
+          this.getCheckInDetails.emit();
         });
       });
 

@@ -5,7 +5,7 @@
 <!--</div>-->
 
 <div class="flex justify-center mt-2.5">
-  <app-check-in>
+  <app-check-in (getCheckInDetails)="getCheckInDetails()">
     <button class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br font-bold py-4 px-6 rounded-full">
       Check In
     </button>
@@ -42,7 +42,7 @@
     </div>
   </div>
 </div>
-<section class=" mx-auto ">
+<section class=" mx-auto shadow" style="border: 1px solid rgb(216, 215, 215); border-radius: 6px; margin:10px; box-shadow: 0px 1px 5px gray; ">
   <ng-container *ngIf="profilePictureUrl">
     <div class="mt-6 w-fit mx-auto">
       <img [src]="profilePictureUrl" class="rounded-full w-28 " alt="profile picture" srcset="">
@@ -60,6 +60,18 @@
       <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
       Active
     </div>
+    <section class="mx-auto" style="width:60%;border: 1px solid rgb(216, 215, 215); border-radius: 6px;" *ngIf="isCheckedIn" >
+      <div class = "mt-2.5">
+        <p class ="font-semibold" style="font-weight: 700;">Status:</p>
+        <p>{{this.checkInDets.title}}</p>
+        <hr style="width:30%; margin-left:35%;">
+        <p class ="font-semibold" style="font-weight: 700;"> Doing: </p>
+        <p>{{this.checkInDets.description}}</p>
+        <hr style="width:30%; margin-left:35%;">
+        <p class ="font-semibold" style="font-weight: 700;"> At: </p>
+        <p>Location ( {{this.checkInDets.location.longitude}} , {{this.checkInDets.location.latitude}} )</p>
+      </div>
+    </section>
   </div>
   <div class="flex justify-center mt-2.5">
     <button class="bg-rose-500 hover:bg-rose-700 text-black dark:text-white font-bold py-2 px-4 rounded-full" (click)="signOut()">

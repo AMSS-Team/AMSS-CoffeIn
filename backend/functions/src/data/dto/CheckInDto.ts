@@ -1,5 +1,5 @@
 import {CheckInModel} from "../models/CheckInModel";
-import {firestore} from "firebase-admin";
+import {Timestamp} from "firebase-admin/firestore";
 
 export type CheckInDto = {
     lat: number;
@@ -14,7 +14,7 @@ export function toCheckInModel(dto: CheckInDto) {
             latitude: dto.lat,
             longitude: dto.lng,
         },
-        timestamp: firestore.Timestamp.now().toMillis(),
+        timestamp: Timestamp.now().toMillis(),
         title: dto.title,
         description: dto.description,
     } as CheckInModel;

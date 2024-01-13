@@ -86,6 +86,7 @@ export class UsersService {
     );
   }
 
+
   public getFriends():Observable<{ data: [User] }> {
     const user = getAuth().currentUser;
     return from(user!.getIdToken()).pipe(
