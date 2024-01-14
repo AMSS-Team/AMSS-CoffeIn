@@ -11,6 +11,7 @@ import {ListCheckinsDto} from "../models/listCheckinsDto";
 import {user} from "@angular/fire/auth";
 import * as Console from "console";
 import {CheckInModel} from "../models/checkIn";
+import {Subject} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +20,7 @@ export class MapService{
   private _map!: google.maps.Map;
   private _markers: google.maps.Marker[] = [];
   @ViewChild(MapInfoWindow, { static: false }) private _infoWindow: MapInfoWindow | undefined;
+  joinedCheckin: Subject<void> = new Subject<void>();
 
   createMap(elementId: string, options: google.maps.MapOptions) {
     this._map = new google.maps.Map(document.getElementById(elementId)!, options);
@@ -143,14 +145,14 @@ export class MapService{
       next: (data) => {
         this.toastr.success("Joined checkin successfully!");
         alert("Joined checkin successfully!");
+        this.joinedCheckin.next();
       },
       error: (err) => {
         this.toastr.error(err.error);
         alert(err.error);
         console.error(err);
       }
-      }
-    )
+    })
   }
 
   public pinCheckIn() {

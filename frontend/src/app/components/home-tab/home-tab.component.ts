@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {getAuth, signOut} from "@firebase/auth";
 import { CheckInModel } from 'app/models/checkIn';
 import { LocationModel } from 'app/models/LocationModel';
@@ -6,6 +6,8 @@ import { UsersService } from 'app/services/users.service';
 // import listchekinsdto
 import {ListCheckinsDto} from "app/models/listCheckinsDto";
 import { Router } from '@angular/router';
+import {Subscription} from "rxjs";
+import {MapService} from "../../services/map.service";
 
 
 @Component({
@@ -13,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './home-tab.component.html',
   styleUrls: ['./home-tab.component.scss']
 })
-export class HomeTabComponent implements OnInit {
+export class HomeTabComponent implements OnInit, OnDestroy {
 
   isCheckedIn: boolean = false;
 
@@ -28,9 +30,15 @@ export class HomeTabComponent implements OnInit {
     title: "",
     description: ""
   };
+  private _subscription: Subscription;
 
   constructor( private userService: UsersService,
-                private cdr: ChangeDetectorRef) { }
+                private mapService: MapService,
+                private cdr: ChangeDetectorRef) {
+    this._subscription = this.mapService.joinedCheckin.subscribe(() => {
+      this.getCheckInDetails();
+    });
+  }
 
   public get isSignedIn(): boolean {
     return getAuth().currentUser !== null;
@@ -125,6 +133,7 @@ export class HomeTabComponent implements OnInit {
     this.getCheckInDetails();
   }
 
-
-
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe();
+  }
 }

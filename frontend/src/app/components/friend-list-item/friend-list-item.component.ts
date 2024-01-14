@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { CheckInModel } from 'app/models/checkIn';
 import {User} from "../../models/user";
 import {UsersService} from "../../services/users.service";
+import {MapService} from "../../services/map.service";
 
 @Component({
   selector: 'app-friend-list-item',
@@ -14,8 +15,8 @@ export class FriendListItemComponent implements OnInit {
   @Output() followEvent = new EventEmitter<User>();
   @Output() unfollowEvent = new EventEmitter<User>();
 
-  constructor(private usersService: UsersService) {
-  }
+  constructor(private usersService: UsersService, private mapService: MapService) { }
+
 
   handleFollowUnfollow(): void {
     if (this.followed) {
@@ -43,6 +44,8 @@ export class FriendListItemComponent implements OnInit {
     this.usersService.followUser(this.user.uid).subscribe({
       next: (_) => {
         this.followEvent.emit(this.user);
+        this.mapService.deleteAllMarkers();
+        this.mapService.pinCheckIn();
       },
       error: (e) => {
         console.error(e);
