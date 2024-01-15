@@ -89,5 +89,25 @@ Aplicația este destinată utilizatorilor care vor să organizeze mai ușor ieș
 ## Interaction Diagram of displaying friends activities
 ![image](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/100606068/483d1d95-79b0-49f2-9bc3-008631a0b3fa)
 
+## Components Diagram of the application
+![Diagrama de componente Melisa drawio](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/79593335/16423082-b973-4d80-bd98-57deb9b68cd5)
+
 ## Use-Case Diagram for checking-in
 ![image](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/100606068/6d02288d-75e2-4aa1-b482-7508279a1d31)
+
+## Design patterns
+
+### Middleware design pattern
+* Design Pattern-ul Middleware în Express.js se referă la un strat intermediar de procesare, care permite intervenția în ciclul de cerere-răspuns, oferind flexibilitate în manipularea și prelucrarea datelor între primirea unei cereri și trimiterea unui răspuns.
+* În cadrul aplicației noastre Express.js, am integrat un middleware de autentificare pentru a asigura securitatea și controlul accesului la resursele protejate. Acest middleware, definit în authMiddleware, este utilizat pentru a verifica tokenurile de autentificare ale utilizatorilor prin Firebase.
+* authMiddleware interceptează cererile către server și efectuează următoarele operațiuni:
+1. Extragerea tokenului bearer din antetul autorizării cererii prin funcția getBearerToken.
+2. Validarea tokenului de autentificare folosind serviciul Firebase Auth prin getAuth().verifyIdToken(token).
+3. Permiterea continuării procesării cererii în cazul în care tokenul este valid (next()).
+4. Trimiterea unui răspuns cu statusul 401 Unauthorized în cazul în care tokenul lipsește sau este invalid.
+
+### Router design pattern
+* Router Pattern-ul în Express.js este fundamental pentru structurarea și organizarea rutei aplicațiilor web. Acesta permite definirea modului în care aplicația răspunde la diverse cereri HTTP, pe baza URL-urilor și a metodelor HTTP. În proiectul nostru, am utilizat acest pattern pentru a gestiona diferite aspecte ale interacțiunii cu utilizatorii, locațiile și notificările.
+* Folosim Router Pattern-ul pentru a organiza logic rutele în module separate, fiecare având un scop specific:
+1. Gestionarea Utilizatorilor și a Relațiilor lor: Într-unul dintre module, avem rute care permit utilizatorilor să urmărească sau să înceteze urmărirea altor utilizatori, să caute utilizatori și să gestioneze relațiile de urmărire.
+2. Check-in-uri și Interacțiuni cu Locații: Un alt modul se ocupă de check-in-uri la diferite locații. Acest modul include rute pentru efectuarea check-in-ului, ștergerea check-in-urilor, listarea check-in-urilor pentru utilizatori specifici și alăturarea la check-in-uri ale altor utilizatori.
