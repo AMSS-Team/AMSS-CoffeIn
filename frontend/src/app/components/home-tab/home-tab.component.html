@@ -5,7 +5,7 @@
 <!--</div>-->
 
 <div class="flex justify-center mt-2.5">
-  <app-check-in (getCheckInDetails)="getCheckInDetails()">
+  <app-check-in (getCheckInDetails)="getCheckInDetails()" (checkInStatusChanged)="this.onCheckInStatusChange($event)">
     <button class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br font-bold py-4 px-6 rounded-full">
       Check In
     </button>

@@ -12,6 +12,7 @@ import {ListCheckinsDto} from "../models/listCheckinsDto";
 import {ResultListCheckinsDto} from "../models/resultListCheckinsDto";
 import {CreateCheckInDto} from "../models/CreateCheckInDto";
 import {MapService} from "./map.service";
+import {InviteModel} from "../models/InviteModdel";
 
 @Injectable({
   providedIn: 'root'
@@ -124,6 +125,33 @@ export class UsersService {
       }
     ));
   }
+
+  public inviteUser(targetUid: string){
+    const user = getAuth().currentUser;
+    return from(user!.getIdToken()).pipe(
+      switchMap((token) => {
+          return this.http.post(`${environment.apiUrl}/location/invite/` + targetUid, null, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+        }
+      ));
+  }
+
+  public getInvites():Observable<{data: InviteModel[]}>{
+    const user = getAuth().currentUser;
+    return from(user!.getIdToken()).pipe(
+      switchMap((token) => {
+          return this.http.get<{data: InviteModel[]}>(`${environment.apiUrl}/location/invite/list`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+        }
+      ));
+  }
+
 
   public getCurrentCheckIn(){
     const user = getAuth().currentUser;

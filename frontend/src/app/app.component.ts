@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, isDevMode, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {initializeApp} from '@firebase/app';
 import {connectAuthEmulator, getAuth, signInWithPopup, signOut, GoogleAuthProvider} from '@firebase/auth';
 import {GoogleMap, MapInfoWindow, MapMarker} from "@angular/google-maps";
@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
   private createCheckin: boolean = false;
 
   public loading = false;
+
+  canInviteFriends: boolean = false;
 
   constructor(private toastr: ToastrService, private service: UsersService, public mapService: MapService) {
   }
@@ -263,8 +265,10 @@ export class AppComponent implements OnInit {
     };
 
     initializeApp(environment.firebaseConfig);
-    connectAuthEmulator(getAuth(), 'http://localhost:9099');
-    connectFirestoreEmulator(getFirestore(), 'localhost', 8080);
+    if(isDevMode()) {
+      connectAuthEmulator(getAuth(), 'http://localhost:9099');
+      connectFirestoreEmulator(getFirestore(), 'localhost', 8080);
+    }
     this.mapService.createMap('map', options);
     getAuth().onAuthStateChanged((user) => {
       if (user) {
@@ -293,7 +297,8 @@ export class AppComponent implements OnInit {
   }
 
 
-
-
+  public onCheckInStatusChange(isCheckedIn: boolean): void {
+    this.canInviteFriends = isCheckedIn;
+  }
 }
 

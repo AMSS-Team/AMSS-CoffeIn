@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {UsersService} from "../../services/users.service";
 import {getAuth} from "@firebase/auth";
 import {User} from "../../models/user";
@@ -12,6 +12,7 @@ export class FriendsTabComponent implements OnInit {
   public searchedUser?: User
   public friends: User[] = [];
 
+  @Input() canInviteFriends: boolean = false;
   constructor(private usersService: UsersService) {}
 
   public ngOnInit() {

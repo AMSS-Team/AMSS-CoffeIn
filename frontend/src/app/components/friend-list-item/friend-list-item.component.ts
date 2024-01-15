@@ -3,6 +3,7 @@ import { CheckInModel } from 'app/models/checkIn';
 import {User} from "../../models/user";
 import {UsersService} from "../../services/users.service";
 import {MapService} from "../../services/map.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-friend-list-item',
@@ -12,11 +13,30 @@ import {MapService} from "../../services/map.service";
 export class FriendListItemComponent implements OnInit {
   @Input() user!: User;
   @Input() followed: boolean = false;
+  @Input() canInvite: boolean = false;
   @Output() followEvent = new EventEmitter<User>();
   @Output() unfollowEvent = new EventEmitter<User>();
 
-  constructor(private usersService: UsersService, private mapService: MapService) { }
 
+
+
+  constructor(private usersService: UsersService, private mapService: MapService, private toastService: ToastrService) { }
+
+
+  onInvite(): void {
+    this.usersService.inviteUser(this.user.uid).subscribe({
+      next: (data) => {
+        this.toastService.success("Invitation sent!", undefined, {
+          timeOut: 1500,
+          positionClass: "toast-bottom-center"
+        });
+      },
+      error: (err) => {
+        alert(err.error);
+        console.error(err);
+      }
+    })
+  }
 
   handleFollowUnfollow(): void {
     if (this.followed) {
@@ -53,6 +73,7 @@ export class FriendListItemComponent implements OnInit {
       }
     });
   }
+
 
   private unfollow(): void {
     this.usersService.unfollowUser(this.user.uid).subscribe({

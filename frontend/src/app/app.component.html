@@ -7,10 +7,10 @@
     <ng-container *ngIf="isSignedIn; else notLoggedIn">
       <mat-tab-group>
         <mat-tab label="Home">
-          <app-home-tab></app-home-tab>
+          <app-home-tab (checkInStatusChange)="this.onCheckInStatusChange($event)"></app-home-tab>
         </mat-tab>
         <mat-tab label="Friends" [disabled]="!isSignedIn">
-          <app-friends-tab></app-friends-tab>
+          <app-friends-tab [canInviteFriends]="this.canInviteFriends"></app-friends-tab>
         </mat-tab>
       </mat-tab-group>
 
