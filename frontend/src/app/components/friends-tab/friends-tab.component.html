@@ -1,6 +1,6 @@
-
 <section class="px-3">
-  <form class="flex flex-column items-center gap-4 my-3 px-3" (keyup.backspace)="searchedUser = undefined" (ngSubmit)="searchUser(userEmail.value)">
+  <form class="flex flex-column items-center gap-4 my-3 px-3" (keyup.backspace)="searchedUser = undefined"
+        (ngSubmit)="searchUser(userEmail.value)">
     <mat-form-field class="grow mb-[-1.25rem]">
       <mat-label>Search for friends</mat-label>
       <input matInput placeholder="Friend's email" name="email" #userEmail>
@@ -10,7 +10,9 @@
   </form>
 
   <ng-container *ngIf="searchedUser">
-    <app-friend-list-item [user]="searchedUser!" [followed]="isUserFollowed(searchedUser)" (followEvent)="populateFriends()" (unfollowEvent)="populateFriends()"></app-friend-list-item>
+    <app-friend-list-item [user]="searchedUser!" [canInvite]="this.canInviteFriends"
+                          [followed]="isUserFollowed(searchedUser)" (followEvent)="populateFriends()"
+                          (unfollowEvent)="populateFriends()"></app-friend-list-item>
   </ng-container>
 </section>
 
@@ -24,7 +26,9 @@
   <ng-template #friendsList>
     <ul>
       <li *ngFor="let friend of friends">
-        <app-friend-list-item [user]="friend" [followed]="isUserFollowed(friend)" (followEvent)="populateFriends()" (unfollowEvent)="populateFriends()"></app-friend-list-item>
+        <app-friend-list-item [user]="friend" [canInvite]="this.canInviteFriends" [followed]="isUserFollowed(friend)"
+                              (followEvent)="populateFriends()"
+                              (unfollowEvent)="populateFriends()"></app-friend-list-item>
       </li>
     </ul>
   </ng-template>

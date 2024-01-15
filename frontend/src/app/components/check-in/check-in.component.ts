@@ -35,6 +35,7 @@ export class CheckInComponent implements OnInit {
     private mapService: MapService
   ) {}
 
+  @Output() checkInStatusChanged = new EventEmitter<boolean>();
 
   public checkIn() {
     const user = getAuth().currentUser;
@@ -51,6 +52,7 @@ export class CheckInComponent implements OnInit {
           title: this.formGroup.value.title
         };
         this.isCheckedIn = true;
+        this.checkInStatusChanged.emit(this.isCheckedIn);
         console.log(checkIn);
         this.usersService.deteleCheckIn();
         this.mapService.deleteMarker();

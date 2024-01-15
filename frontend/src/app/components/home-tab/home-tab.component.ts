@@ -1,13 +1,15 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {getAuth, signOut} from "@firebase/auth";
-import { CheckInModel } from 'app/models/checkIn';
-import { LocationModel } from 'app/models/LocationModel';
-import { UsersService } from 'app/services/users.service';
+import {CheckInModel} from 'app/models/checkIn';
+import {LocationModel} from 'app/models/LocationModel';
+import {UsersService} from 'app/services/users.service';
 // import listchekinsdto
 import {ListCheckinsDto} from "app/models/listCheckinsDto";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {Subscription} from "rxjs";
 import {MapService} from "../../services/map.service";
+import {InviteModel} from "../../models/InviteModdel";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -19,7 +21,7 @@ export class HomeTabComponent implements OnInit, OnDestroy {
 
   isCheckedIn: boolean = false;
 
-  checkInDets : CheckInModel = {
+  checkInDets: CheckInModel = {
     uid: "",
     location: {
       uid: "",
@@ -32,24 +34,27 @@ export class HomeTabComponent implements OnInit, OnDestroy {
   };
   private _subscription: Subscription;
 
-  constructor( private userService: UsersService,
-                private mapService: MapService,
-                private cdr: ChangeDetectorRef) {
+  constructor(private userService: UsersService,
+              private mapService: MapService,
+              private cdr: ChangeDetectorRef,
+              private toastService: ToastrService,) {
     this._subscription = this.mapService.joinedCheckin.subscribe(() => {
       this.getCheckInDetails();
     });
   }
 
+  @Output() checkInStatusChange = new EventEmitter<boolean>();
+
   public get isSignedIn(): boolean {
     return getAuth().currentUser !== null;
   }
 
-  public get getDisplayName() : string {
+  public get getDisplayName(): string {
     if (this.isSignedIn) {
       const user = getAuth().currentUser;
       let displayName: string | null | undefined = "";
       displayName = user?.displayName;
-      if (displayName == null){
+      if (displayName == null) {
         displayName = "";
       }
       return displayName;
@@ -62,7 +67,7 @@ export class HomeTabComponent implements OnInit, OnDestroy {
     return user.photoURL;
   }
 
-  public get getEmail() : string {
+  public get getEmail(): string {
     if (this.isSignedIn) {
       const user = getAuth().currentUser;
       let email: string | null | undefined = "";
@@ -81,8 +86,7 @@ export class HomeTabComponent implements OnInit, OnDestroy {
   }
 
   public get getInitials(): string {
-    if (this.isSignedIn)
-    {
+    if (this.isSignedIn) {
       const user = getAuth().currentUser;
       const displayName = user?.displayName;
       let initials: string = "/";
@@ -90,18 +94,32 @@ export class HomeTabComponent implements OnInit, OnDestroy {
         initials = displayName.replace(/[^A-Z]+/g, "");
       }
       return initials;
-    }
-    else {
+    } else {
       return "/";
     }
   }
 
-  public getCheckInDetails()
-  {
+  public onCheckInStatusChange(isCheckedIn: boolean): void {
+    this.checkInStatusChange.emit(isCheckedIn);
+  }
+
+  private getInvites() {
+    this.userService.getInvites().subscribe((invites) => {
+      const invitesList = invites.data
+      invitesList.forEach((invite: InviteModel) => {
+          this.toastService.info(`You have been invited to a check-in at ${invite.title}`, `Invite from ${invite.userName}`, {
+            timeOut: 3000,
+            positionClass: 'toast-bottom-center',
+          })
+        }
+      )
+    })
+  }
+
+  public getCheckInDetails() {
     const user = getAuth().currentUser;
 
-    if (user != null)
-    {
+    if (user != null) {
       let listFriendsCheckIns: ListCheckinsDto = {
         userIds: [],
       }
@@ -109,9 +127,9 @@ export class HomeTabComponent implements OnInit, OnDestroy {
       this.userService.getCheckIns({userIds: [user!.uid]}).subscribe((checkIns) => {
         console.log(checkIns);
         Object.values(checkIns.data).forEach((checkIn: CheckInModel | null) => {
-            if (checkIn != null)
-            {
+            if (checkIn != null) {
               this.isCheckedIn = true;
+              this.onCheckInStatusChange(this.isCheckedIn);
               //console.log(checkIn.location.latitude);
               this.checkInDets.location.latitude = checkIn.location.latitude;
               //console.log(checkIn.location.longitude);
@@ -128,9 +146,9 @@ export class HomeTabComponent implements OnInit, OnDestroy {
   }
 
 
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
     this.getCheckInDetails();
+    this.getInvites();
   }
 
   ngOnDestroy(): void {

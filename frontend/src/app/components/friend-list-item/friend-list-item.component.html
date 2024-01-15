@@ -23,5 +23,12 @@
       (click)="handleFollowUnfollow()">
       {{ followed ? 'Unfollow' : 'Follow' }}
     </button>
+
+    <button
+     *ngIf="this.canInvite"
+      class="bg-blue-500 hover:bg-blue-700 text-black dark:text-white font-bold py-1 px-2 rounded-full"
+      (click)="onInvite()">
+      Invite
+    </button>
   </div>
 </article>
