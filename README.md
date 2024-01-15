@@ -3,6 +3,17 @@
 Frontend: Angular project in [`frontend`](./frontend).
 Backend: Firebase + Express in [`backend`](./backend).
 
+
+## Participanti si contributia fiecaruia:
+
+- Vlad Melisa : Friend_List system ( crearea, salvarea si urmarirea prietenilor intr-o lista dedicata).
+- 
+- Oprea Ana : Systemul de Checkin : Join la un checkin existent si actualizarea starii / locatiei utilizatorului.
+- 
+- Rotaru Radu : Systemul de notificari si invite-uri intre prieteni pe baza check-pointurilor deja existente.
+- 
+- Zabava Claudiu: MAP system si crearea de check-points accesibile prietenilor.
+
 # Analiza Proiectului
 
 
