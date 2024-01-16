@@ -8,6 +8,7 @@ import {ListCheckinsDto} from "../../data/dto/ListCheckinsDto";
 import {ResultListCheckinsDto} from "../../data/dto/ResultListCheckinsDto";
 import UserRepository from "../../data/repositories/UserRepository";
 import {toInviteDto} from "../../data/models/InviteModdel";
+import {sendCheckInNotification} from "../../services/NotificationService";
 
 const router = Router();
 
@@ -20,6 +21,13 @@ router.post("/checkin", async (req, res) => {
             currentUser.uid,
             checkInModel,
         );
+
+      sendCheckInNotification(
+        result,
+        (
+          await UserRepository.getInstance().getFollowers(currentUser.uid)
+        ).map((user) => user.uid),
+      );
 
         res.send({data: fromCheckInModel(result)} as ApiResponse);
     } catch (e) {
