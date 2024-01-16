@@ -10,7 +10,7 @@ Backend: Firebase + Express in [`backend`](./backend).
 
 - Vlad Melisa : Friend_List system (crearea, salvarea si urmarirea prietenilor intr-o lista dedicata); Interaction Diagram of displaying friends activities; Components Diagram of the application
   
-- Oprea Ana : Systemul de Checkin : Join la un checkin existent si actualizarea starii / locatiei utilizatorului.
+- Oprea Ana : Systemul de Checkin : Join la un checkin existent si actualizarea starii / locatiei utilizatorului; Use-Case Diagram for checking-in; Package Diagram for check-in feature
   
 - Rotaru Radu : Systemul de notificari si invite-uri intre prieteni pe baza check-pointurilor deja existente.
   
