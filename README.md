@@ -12,7 +12,7 @@ Backend: Firebase + Express in [`backend`](./backend).
   
 - Oprea Ana : Systemul de Checkin : Join la un checkin existent si actualizarea starii / locatiei utilizatorului; Use-Case Diagram for checking-in; Package Diagram for check-in feature
   
-- Rotaru Radu : Systemul de notificari si invite-uri intre prieteni pe baza check-pointurilor deja existente.
+- Rotaru Radu : Systemul de notificari si invite-uri intre prieteni pe baza check-pointurilor deja existente; Interaction Diagram for the notification system of the check-in; Components Diagram for Invitations feature
   
 - Zabava Claudiu: MAP system si crearea de check-points accesibile prietenilor; State Diagram for joining check-in; Package Diagram for Friends Checkpoints and Check In on Map 
 
