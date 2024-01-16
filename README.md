@@ -95,6 +95,9 @@ Aplicația este destinată utilizatorilor care vor să organizeze mai ușor ieș
 ## Use-Case Diagram for checking-in
 ![image](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/100606068/6d02288d-75e2-4aa1-b482-7508279a1d31)
 
+## Components Diagram for Invitations feature
+![image](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/94719384/3c60baed-5c31-4e8e-b8b3-267a12be42b2)
+
 ## Design patterns
 
 ### Middleware design pattern
