@@ -100,6 +100,10 @@ Aplicația este destinată utilizatorilor care vor să organizeze mai ușor ieș
 ## Components Diagram for Invitations feature
 ![image](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/94719384/3c60baed-5c31-4e8e-b8b3-267a12be42b2)
 
+# Package Diagram for check-in feature
+![image](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/100606068/0c466e99-fc8d-4ab2-878a-5dbb7f4c5b9e)
+
+
 ## Design patterns
 
 ### Middleware design pattern
