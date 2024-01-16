@@ -6,15 +6,16 @@ Backend: Firebase + Express in [`backend`](./backend).
 ## [Link Demo](https://www.youtube.com/watch?v=EPqR_k0EeKU)
 
 
-## Participanti si contributia fiecaruia:
+## Participanti :
 
-- Vlad Melisa : Friend_List system (crearea, salvarea si urmarirea prietenilor intr-o lista dedicata); Interaction Diagram of displaying friends activities; Components Diagram of the application
-  
-- Oprea Ana : Systemul de Checkin : Join la un checkin existent si actualizarea starii / locatiei utilizatorului; Use-Case Diagram for checking-in; Package Diagram for check-in feature
-  
-- Rotaru Radu : Systemul de notificari si invite-uri intre prieteni pe baza check-pointurilor deja existente; Interaction Diagram for the notification system of the check-in; Components Diagram for Invitations feature
-  
-- Zabava Claudiu: MAP system si crearea de check-points accesibile prietenilor; State Diagram for joining check-in; Package Diagram for Friends Checkpoints and Check In on Map 
+- Vlad Melisa
+
+- Oprea Ana
+
+- Zabava Claudiu
+
+- Rotaru Radu
+- 
 
 # Analiza Proiectului
 
@@ -31,6 +32,16 @@ Backend: Firebase + Express in [`backend`](./backend).
 * Posibilitatea de a da join la un check-in în cazul în care utilizatorul se află în range
 
 Astfel, aplicația se bazează pe augmentarea calității relațiilor utilizatorului, devenind un ajutor pentru comunicare prin funcțiile sale.
+
+## Contributia fiecaruia
+- Vlad Melisa : Friend_List system (crearea, salvarea si urmarirea prietenilor intr-o lista dedicata); Interaction Diagram of displaying friends activities; Components Diagram of the application
+  
+- Oprea Ana : Systemul de Checkin : Join la un checkin existent si actualizarea starii / locatiei utilizatorului; Use-Case Diagram for checking-in; Package Diagram for check-in feature
+  
+- Rotaru Radu : Systemul de notificari si invite-uri intre prieteni pe baza check-pointurilor deja existente; Interaction Diagram for the notification system of the check-in; Components Diagram for Invitations feature
+  
+- Zabava Claudiu: MAP system si crearea de check-points accesibile prietenilor; State Diagram for joining check-in; Package Diagram for Friends Checkpoints and Check In on Map 
+
 
 ## Target Group
 
