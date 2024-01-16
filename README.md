@@ -14,7 +14,7 @@ Backend: Firebase + Express in [`backend`](./backend).
   
 - Rotaru Radu : Systemul de notificari si invite-uri intre prieteni pe baza check-pointurilor deja existente.
   
-- Zabava Claudiu: MAP system si crearea de check-points accesibile prietenilor.
+- Zabava Claudiu: MAP system si crearea de check-points accesibile prietenilor; State Diagram for joining check-in; Package Diagram for Friends Checkpoints and Check In on Map 
 
 # Analiza Proiectului
 
@@ -87,6 +87,10 @@ Aplicația este destinată utilizatorilor care vor să organizeze mai ușor ieș
 
 ## State Diagram for joining check-in
 ![WhatsApp Image 2023-12-18 at 20 44 52 (1)](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/100606068/002808bf-dd46-49f9-8327-736421b0fbed)
+
+## Package Diagram for Friends Checkpoints and Check In on Map
+![WhatsApp Image 2024-01-16 at 16 09 23](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/79593335/b611c750-bd0c-4ead-a0e2-ffa94fcc942c)
+
 
 ## Interaction Diagram of displaying friends activities
 ![image](https://github.com/AMSS-Team/AMSS-CoffeIn/assets/100606068/483d1d95-79b0-49f2-9bc3-008631a0b3fa)
